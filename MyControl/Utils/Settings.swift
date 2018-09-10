@@ -20,9 +20,9 @@ class Settings {
 //        let theme = UserDefaults.standard.string(forKey: "theme") ?? ""
         
 //        if (theme == "") {
-//            self.theme = .dark
+            self.theme = .dark
 //        } else {
-            self.theme = .bright
+//            self.theme = .bright
 //        }
     }
 }

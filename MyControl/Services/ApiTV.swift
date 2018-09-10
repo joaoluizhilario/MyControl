@@ -14,15 +14,7 @@ extension ApiTV {
     func toggleInputKey(buttonKey: ButtonKeyType!) {
         let url = String(format:"%@%@", TV_SERVER_URL, ApiPaths.shared.inputKeyPath!)
         let params: [String: Any] = ["key": ApiPaths.shared.inputKeyForButtonType(buttonKey)]
-        fetchGenericData(url: url, method: .post, parameters: params) { (jsonResponse, error) in
-            if (error != nil) {
-                
-            } else {
-                if let dic = jsonResponse as? [String: Any] {
-                    
-                }
-            }
-        }
+        fetchGenericData(url: url, method: .post, parameters: params) { (jsonResponse, error) in }
     }
     
     func tvSystemInfo(completion: @escaping(TVSystem?, String?) -> ()) {
@@ -43,7 +35,7 @@ extension ApiTV {
 
 class ApiTV {
     private var TV_SERVER_URL: String!
-    private var TV_SERVER_PORT: Int! = 1925
+    private var TV_SERVER_PORT: Int! = ApiPaths.shared.port
     
     public static let shared: ApiTV = ApiTV()
     private init() {}

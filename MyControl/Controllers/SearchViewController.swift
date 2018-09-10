@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
     
     let progressView: UIProgressView = {
         let view = UIProgressView(progressViewStyle: UIProgressViewStyle.bar)
+        view.trackTintColor = .lightGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -73,7 +74,7 @@ class SearchViewController: UIViewController {
         
         view.addConstraintsWithFormat(format: "H:|-8-[v0]-8-|", views: centerLabel)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: progressView)
-        view.addConstraintsWithFormat(format: "V:|-1-[v0(2)]", views: progressView)
+        view.addConstraintsWithFormat(format: "V:|[v0(2)]", views: progressView)
         
         view.addConstraintsWithFormat(format: "V:[v0]-30-|", views: completeButton)
         completeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
