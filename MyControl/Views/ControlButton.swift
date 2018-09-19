@@ -18,21 +18,25 @@ class ControlButton: UIButton {
         backgroundColor = bgColor
         imageView?.contentMode = .scaleAspectFit
         
-        setTitleColor(AppColors.buttonTintCollor, for: .normal)
+        setTitleColor(AppColors.buttonTintColor, for: .normal)
         
         if (icon != .none) {
-            if (icon.isNumber) {
+            if (icon.isNumber || icon == .dot) {
                 setTitle(icon.stringValue, for: .normal)
             } else {
                 if (icon == .power) {
                     setImage(UIImage(named: self.keyType.stringValue), for: .normal)
                 } else {
                     setImage(UIImage(named: self.keyType.stringValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
-                    tintColor = AppColors.buttonTintCollor
+                    tintColor = AppColors.buttonTintColor
                 }
                 
                 if (icon == .ok) {
                     addConstraintsWithFormat(format: "V:[v0(40)]", views: imageView!)
+                }
+                
+                if (icon == .theme) {
+                    addConstraintsWithFormat(format: "V:[v0(20)]", views: imageView!)
                 }
                 
                 if let padding = imagePadding {

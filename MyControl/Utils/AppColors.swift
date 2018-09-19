@@ -40,7 +40,7 @@ class AppColors {
         }
     }
     
-    static var buttonTintCollor: UIColor {
+    static var buttonTintColor: UIColor {
         get {
             if (Settings.shared.theme == .dark) {
                 return .white

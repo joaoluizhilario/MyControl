@@ -1,0 +1,219 @@
+
+{
+    "brand": "samsung",
+    "port": 55000,
+    "server": "/",
+    "methods": [
+        {
+            "name": "volume",
+            "supported_verbs": ["GET", "POST"],
+            "path": "audio/volume"
+        },
+        {
+            "name": "channel",
+            "supported_verbs": ["GET"],
+            "path": "channels",
+            "sub_methods": [
+                {
+                "name": "current_channel",
+                "supported_verbs": ["GET", "POST"],
+                "path": "channels/current"
+                }
+            ]
+        },
+        {
+            "name": "channel_list",
+            "supported_verbs": ["GET"],
+            "path": "channellists"
+        },
+        {
+            "name": "input_key",
+            "supported_verbs": ["POST"],
+            "path": "input/key"
+        },
+        {
+            "name": "source",
+            "supported_verbs": ["GET"],
+            "path": "sources"
+        },
+        {
+            "name": "system",
+            "supported_verbs": ["GET"],
+            "path": "system",
+            "sub_methods": [
+                {
+                "name": "country",
+                "supported_verbs": ["GET"],
+                "path": "system/country"
+                },
+                {
+                "name": "name",
+                "supported_verbs": ["GET"],
+                "path": "system/name"
+                },
+                {
+                "name": "menulanguage",
+                "supported_verbs": ["GET"],
+                "path": "system/menulanguage"
+                },
+                {
+                "name": "model",
+                "supported_verbs": ["GET"],
+                "path": "system/model"
+                },
+                {
+                "name": "serialnumber",
+                "supported_verbs": ["GET"],
+                "path": "system/serialnumber"
+                },
+                {
+                "name": "softwareversion",
+                "supported_verbs": ["GET"],
+                "path": "system/softwareversion"
+                }
+            ]
+        }
+    ],
+    "input_keys": [
+        {
+            "button_key": "power",
+            "input_key": "KEY_STANDBY"
+        },
+        {
+            "button_key": "pause",
+            "input_key": "KEY_PAUSE"
+        },
+        {
+            "button_key": "stop",
+            "input_key": "KEY_STOP"
+        },
+        {
+            "button_key": "play",
+            "input_key": "KEY_PLAY"
+        },
+        {
+            "button_key": "rewind",
+            "input_key": "KEY_REWIND"
+        },
+        {
+            "button_key": "forward",
+            "input_key": "KEY_FF"
+        },
+        {
+            "button_key": "record",
+            "input_key": "KEY_REC"
+        },
+        {
+            "button_key": "search",
+            "input_key": "KEY_INFO"
+        },
+        {
+            "button_key": "configs",
+            "input_key": "KEY_TOOLS"
+        },
+        {
+            "button_key": "home",
+            "input_key": "KEY_MENU"
+        },
+        {
+            "button_key": "options",
+            "input_key": "KEY_GUIDE"
+        },
+        {
+            "button_key": "up",
+            "input_key": "KEY_UP"
+        },
+        {
+            "button_key": "left",
+            "input_key": "KEY_LEFT"
+        },
+        {
+            "button_key": "right",
+            "input_key": "KEY_RIGHT"
+        },
+        {
+            "button_key": "down",
+            "input_key": "KEY_DOWN"
+        },
+        {
+            "button_key": "ok",
+            "input_key": "KEY_ENTER"
+        },
+        {
+            "button_key": "undo",
+            "input_key": "KEY_RETURN"
+        },
+        {
+            "button_key": "source",
+            "input_key": "KEY_SOURCE"
+        },
+        {
+            "button_key": "mute",
+            "input_key": "KEY_MUTE"
+        },
+        {
+            "button_key": "volume_down",
+            "input_key": "KEY_VOLDOWN"
+        },
+        {
+            "button_key": "volume_up",
+            "input_key": "KEY_VOLUP"
+        },
+        {
+            "button_key": "channel_down",
+            "input_key": "KEY_CHDOWN"
+        },
+        {
+            "button_key": "channel_up",
+            "input_key": "KEY_CHUP"
+        },
+        {
+            "button_key": "exit",
+            "input_key": "KEY_EXIT"
+        },
+        {
+            "button_key": "0",
+            "input_key": "KEY_0"
+        },
+        {
+            "button_key": "1",
+            "input_key": "KEY_1"
+        },
+        {
+            "button_key": "2",
+            "input_key": "KEY_2"
+        },
+        {
+            "button_key": "3",
+            "input_key": "KEY_3"
+        },
+        {
+            "button_key": "4",
+            "input_key": "KEY_4"
+        },
+        {
+            "button_key": "5",
+            "input_key": "KEY_5"
+        },
+        {
+            "button_key": "6",
+            "input_key": "KEY_6"
+        },
+        {
+            "button_key": "7",
+            "input_key": "KEY_7"
+        },
+        {
+            "button_key": "8",
+            "input_key": "KEY_8"
+        },
+        {
+            "button_key": "9",
+            "input_key": "KEY_9"
+        },
+        {
+            "button_key": ".",
+            "input_key": "KEY_PRECH"
+        }
+    ]
+}

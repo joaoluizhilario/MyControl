@@ -50,9 +50,9 @@ class NumberPadView: UIView {
         }()
         let stackViewFourth: UIStackView = {
             let stack = UIStackView(arrangedSubviews: [
-                ControlButton(icon: .none, bgColor: AppColors.buttonBackgroundColor, title: ".", target: target, action: action),
+                ControlButton(icon: .dot, bgColor: AppColors.buttonBackgroundColor, target: target, action: action),
                 ControlButton(icon: .zero, bgColor: AppColors.buttonBackgroundColor, target: target, action: action),
-                ControlButton(icon: .none, bgColor: AppColors.buttonBackgroundColor, title: "", target: target, action: action)
+                ControlButton(icon: .theme, bgColor: AppColors.buttonBackgroundColor, target: target, action: action)
             ])
             stack.translatesAutoresizingMaskIntoConstraints = false
             stack.distribution = .fillEqually

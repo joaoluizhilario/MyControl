@@ -45,6 +45,8 @@ enum ButtonKeyType: String, CodingKey {
     case seven = "7"
     case eight = "8"
     case nine = "9"
+    case dot = "."
+    case theme = "icon_theme"
     
     var isNumber: Bool! {
         get {

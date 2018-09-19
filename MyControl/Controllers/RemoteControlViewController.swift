@@ -12,11 +12,25 @@ class RemoteControlViewController: UIViewController {
  
     lazy var viewOptionsNav: NavigatioButtonsView = NavigatioButtonsView(target: self, action: #selector(buttonKeySelected))
     lazy var stackViewNumbers: NumberPadView = NumberPadView(target: self, action: #selector(buttonKeySelected))
+    let tv: SmartTV!
+    let clientApi: ApiTV!
+    
+    init(_ tv: SmartTV!) {
+        self.tv = tv
+        self.clientApi = ApiTV.factory(brand: tv.brand)
+        self.clientApi.setServerAddress(address: tv.ipAddress)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     lazy var stackViewTopFirst: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             ControlButton(icon: .channelDown, bgColor: AppColors.buttonBackgroundColor, target: self, action: #selector(buttonKeySelected), imagePadding: 8),
-            ControlButton(icon: .power, target: self, action: #selector(buttonKeySelected), imagePadding: 3),
+            ControlButton(icon: .home, bgColor: AppColors.buttonBackgroundColor, target: self, action: #selector(buttonKeySelected), imagePadding: 8),
+//            ControlButton(icon: .power, target: self, action: #selector(buttonKeySelected), imagePadding: 3),
             ControlButton(icon: .channelUp, bgColor: AppColors.buttonBackgroundColor, target: self, action: #selector(buttonKeySelected), imagePadding: 8)
             ])
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +90,37 @@ class RemoteControlViewController: UIViewController {
     }
     
     @objc func buttonKeySelected(_ sender: ControlButton) {
-        ApiTV.shared.toggleInputKey(buttonKey: sender.keyType)
+        if (sender.keyType != .theme) {
+            clientApi.sendInputKey(buttonKey: sender.keyType)
+        } else {
+            if (Settings.shared.theme == .dark) {
+                Settings.shared.theme = .bright
+            } else {
+                Settings.shared.theme = .dark
+            }
+            updateThemeColor()
+        }
         print("Clicou \(sender.keyType)")
+    }
+    
+    func updateThemeColor() {
+        view.backgroundColor = AppColors.backgroundColor
+        [stackViewTopFirst, stackViewTopSecond].forEach { (stackView) in
+            stackView.arrangedSubviews.forEach({ (button) in
+                button.backgroundColor = AppColors.buttonBackgroundColor
+                (button as! ControlButton).setTitleColor(AppColors.buttonTintColor, for: .normal)
+                button.tintColor = AppColors.buttonTintColor
+            })
+        }
+        
+        stackViewNumbers.stackView.arrangedSubviews.forEach { (stackView) in
+            (stackView as! UIStackView).arrangedSubviews.forEach({ (button) in
+                button.backgroundColor = AppColors.buttonBackgroundColor
+                (button as! ControlButton).setTitleColor(AppColors.buttonTintColor, for: .normal)
+                button.tintColor = AppColors.buttonTintColor
+            })
+        }
+        
+        viewOptionsNav.updateThemeColor()
     }
 }

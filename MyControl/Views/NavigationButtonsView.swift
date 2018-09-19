@@ -23,14 +23,12 @@ class NavigatioButtonsView: UIView {
     
     let viewNavigation: UIView = {
         let view = UIView()
-        view.backgroundColor = AppColors.navigationViewBackgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let viewOptionsNav: UIView = {
         let view = UIView()
-        view.backgroundColor = AppColors.buttonBackgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -40,7 +38,7 @@ class NavigatioButtonsView: UIView {
         downButton = ControlButton(icon: .down, target: target, action: action)
         leftButton = ControlButton(icon: .left, target: target, action: action)
         rightButton = ControlButton(icon: .right, target: target, action: action)
-        okButton = ControlButton(icon: .ok, bgColor: AppColors.buttonBackgroundColor, target: target, action: action)
+        okButton = ControlButton(icon: .ok, target: target, action: action)
         
         searchButton = ControlButton(icon: .search, target: target, action: action)
         optionsButton = ControlButton(icon: .options, target: target, action: action)
@@ -50,6 +48,7 @@ class NavigatioButtonsView: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         setupViews()
+        updateThemeColor()
     }
     
     override func layoutSubviews() {
@@ -97,6 +96,22 @@ class NavigatioButtonsView: UIView {
         okButton.widthAnchor.constraint(equalTo: viewNavigation.widthAnchor, multiplier: 0.5).isActive = true
         okButton.heightAnchor.constraint(equalTo: okButton.widthAnchor).isActive = true
         okButton.centerYAnchor.constraint(equalTo: viewNavigation.centerYAnchor).isActive = true
+    }
+    
+    func updateThemeColor() {
+        viewNavigation.backgroundColor = AppColors.navigationViewBackgroundColor
+        viewOptionsNav.backgroundColor = AppColors.buttonBackgroundColor
+        
+        [okButton, searchButton, optionsButton, undoButton, exitButton, okButton].forEach { (button) in
+            
+            button!.backgroundColor = AppColors.buttonBackgroundColor
+            button!.setTitleColor(AppColors.buttonTintColor, for: .normal)
+            button!.tintColor = AppColors.buttonTintColor
+        }
+        
+        [upButton, leftButton, downButton, rightButton].forEach { (button) in
+            button!.tintColor = AppColors.buttonTintColor
+        }
     }
     
     required init(coder: NSCoder) {

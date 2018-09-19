@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         let nav = UINavigationController(rootViewController: SearchViewController())
-//        let nav = UINavigationController(rootViewController: RemoteControlViewController())
+        if let tv = Settings.shared.tv {
+            nav.pushViewController(RemoteControlViewController(tv), animated: false)
+        }
         nav.isNavigationBarHidden = true
         window?.rootViewController = nav
         

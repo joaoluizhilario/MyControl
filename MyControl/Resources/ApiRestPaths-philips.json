@@ -1,4 +1,5 @@
 {
+    "brand": "philips",
     "port": 1925,
     "server": "/1/",
     "methods": [
@@ -127,7 +128,7 @@
        },
        {
            "button_key": "right",
-           "input_key": "CursorRight:"
+           "input_key": "CursorRight"
        },
        {
            "button_key": "down",
@@ -139,7 +140,7 @@
        },
        {
            "button_key": "undo",
-           "input_key": "Back:"
+           "input_key": "Back"
        },
        {
            "button_key": "source",
@@ -210,7 +211,7 @@
            "input_key": "Digit9"
        },
        {
-           "button_key": "dot",
+           "button_key": ".",
            "input_key": "Dot"
        }
     ]

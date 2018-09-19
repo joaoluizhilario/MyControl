@@ -10,6 +10,7 @@
 		2E9EF6E74227BFB8DCC43615 /* Pods_MyControlTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDD07CFE92B35CDAA473BC5 /* Pods_MyControlTests.framework */; };
 		740FDF904CF5C2E008D55524 /* Pods_MyControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539D6AFF0DF481E0317E5AEA /* Pods_MyControl.framework */; };
 		7F25AAF91F305239AAED8555 /* Pods_MyControlUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FB6CD0ED155960C1240EB8 /* Pods_MyControlUITests.framework */; };
+		9D27700F214ABE5B00E3F628 /* ApiRestPaths-lg.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D27700E214ABE5B00E3F628 /* ApiRestPaths-lg.json */; };
 		9D6F08372141DFC70081DF7A /* RemoteControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F08362141DFC70081DF7A /* RemoteControlViewController.swift */; };
 		9D6F083A21421EF30081DF7A /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F083921421EF30081DF7A /* ControlButton.swift */; };
 		9D6F083C2142B16B0081DF7A /* NavigationButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F083B2142B16B0081DF7A /* NavigationButtonsView.swift */; };
@@ -31,13 +32,18 @@
 		9D8783D02140AEE9002226D0 /* NetworkCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783CA2140AEE9002226D0 /* NetworkCalculator.m */; };
 		9D8783D12140AEE9002226D0 /* LANProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783CB2140AEE9002226D0 /* LANProperties.m */; };
 		9D8783D42140AEF9002226D0 /* MMDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783D22140AEF9002226D0 /* MMDevice.m */; };
-		9D8783DA2140B42E002226D0 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783D82140B42E002226D0 /* MainPresenter.swift */; };
+		9D8783DA2140B42E002226D0 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783D82140B42E002226D0 /* SearchViewModel.swift */; };
 		9D8783DD2140B647002226D0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783DC2140B647002226D0 /* SearchViewController.swift */; };
 		9D8783E02140B6C9002226D0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783DF2140B6C9002226D0 /* Extensions.swift */; };
 		9D8783E321415EBB002226D0 /* ApiTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783E221415EBB002226D0 /* ApiTV.swift */; };
 		9D8783E521416492002226D0 /* ApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783E421416492002226D0 /* ApiResponses.swift */; };
-		9D8783E721416B1A002226D0 /* ApiRestPaths.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D8783E621416B1A002226D0 /* ApiRestPaths.json */; };
+		9D8783E721416B1A002226D0 /* ApiRestPaths-philips.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D8783E621416B1A002226D0 /* ApiRestPaths-philips.json */; };
 		9D8783EB21417061002226D0 /* ApiPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8783EA21417061002226D0 /* ApiPaths.swift */; };
+		9D95AB8F2149C81C00C42145 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D95AB8E2149C81C00C42145 /* Alert.swift */; };
+		9D95AB912149CC3400C42145 /* SmartTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D95AB902149CC3400C42145 /* SmartTV.swift */; };
+		9D95AB932149D5AD00C42145 /* DeviceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D95AB922149D5AD00C42145 /* DeviceTVCell.swift */; };
+		9DFC0C94214874F800E21E36 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFC0C93214874F800E21E36 /* Box.swift */; };
+		9DFC0C9921488AF900E21E36 /* ApiRestPaths-samsung.json in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC0C9821488AF900E21E36 /* ApiRestPaths-samsung.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +70,7 @@
 		4EDD07CFE92B35CDAA473BC5 /* Pods_MyControlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyControlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		539D6AFF0DF481E0317E5AEA /* Pods_MyControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D6857CE01D4A712B2E8B5A /* Pods-MyControlUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyControlUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyControlUITests/Pods-MyControlUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9D27700E214ABE5B00E3F628 /* ApiRestPaths-lg.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ApiRestPaths-lg.json"; sourceTree = "<group>"; };
 		9D6F08362141DFC70081DF7A /* RemoteControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteControlViewController.swift; sourceTree = "<group>"; };
 		9D6F083921421EF30081DF7A /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
 		9D6F083B2142B16B0081DF7A /* NavigationButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonsView.swift; sourceTree = "<group>"; };
@@ -102,14 +109,19 @@
 		9D8783CC2140AEE9002226D0 /* NetworkCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkCalculator.h; path = "../../../../../../Downloads/MMLanScan-master/MMLanScan/Misc/NetworkCalculator.h"; sourceTree = "<group>"; };
 		9D8783D22140AEF9002226D0 /* MMDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMDevice.m; path = "../../../../../../Downloads/MMLanScan-master/MMLanScan/Objects/MMDevice.m"; sourceTree = "<group>"; };
 		9D8783D32140AEF9002226D0 /* MMDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMDevice.h; path = "../../../../../../Downloads/MMLanScan-master/MMLanScan/Objects/MMDevice.h"; sourceTree = "<group>"; };
-		9D8783D82140B42E002226D0 /* MainPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		9D8783D82140B42E002226D0 /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		9D8783D92140B42E002226D0 /* MMLANScan-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMLANScan-Bridging-Header.h"; sourceTree = "<group>"; };
 		9D8783DC2140B647002226D0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9D8783DF2140B6C9002226D0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9D8783E221415EBB002226D0 /* ApiTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTV.swift; sourceTree = "<group>"; };
 		9D8783E421416492002226D0 /* ApiResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponses.swift; sourceTree = "<group>"; };
-		9D8783E621416B1A002226D0 /* ApiRestPaths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiRestPaths.json; sourceTree = "<group>"; };
+		9D8783E621416B1A002226D0 /* ApiRestPaths-philips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ApiRestPaths-philips.json"; sourceTree = "<group>"; };
 		9D8783EA21417061002226D0 /* ApiPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPaths.swift; sourceTree = "<group>"; };
+		9D95AB8E2149C81C00C42145 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		9D95AB902149CC3400C42145 /* SmartTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTV.swift; sourceTree = "<group>"; };
+		9D95AB922149D5AD00C42145 /* DeviceTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTVCell.swift; sourceTree = "<group>"; };
+		9DFC0C93214874F800E21E36 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		9DFC0C9821488AF900E21E36 /* ApiRestPaths-samsung.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ApiRestPaths-samsung.json"; sourceTree = "<group>"; };
 		A51493D44895BEA6B2DE0211 /* Pods-MyControlTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyControlTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyControlTests/Pods-MyControlTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2A4F332049E458DA27A217 /* Pods-MyControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyControl/Pods-MyControl.release.xcconfig"; sourceTree = "<group>"; };
 		ECC429E276790532A25F3E88 /* Pods-MyControlTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyControlTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyControlTests/Pods-MyControlTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +174,7 @@
 				9D6F083921421EF30081DF7A /* ControlButton.swift */,
 				9D6F083B2142B16B0081DF7A /* NavigationButtonsView.swift */,
 				9D6F083D2142B24A0081DF7A /* NumberPadView.swift */,
+				9D95AB922149D5AD00C42145 /* DeviceTVCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -170,6 +183,9 @@
 			isa = PBXGroup;
 			children = (
 				9D6F08442142C2660081DF7A /* ButtonKeyType.swift */,
+				9DFC0C93214874F800E21E36 /* Box.swift */,
+				9D6F08412142B9900081DF7A /* Settings.swift */,
+				9D95AB902149CC3400C42145 /* SmartTV.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,17 +215,18 @@
 		9D8783792140AC29002226D0 /* MyControl */ = {
 			isa = PBXGroup;
 			children = (
+				9DFC0C952148891900E21E36 /* Resources */,
 				9D6F08432142C2440081DF7A /* Models */,
 				9D6F083821421EDA0081DF7A /* Views */,
 				9D8783E121415E85002226D0 /* Services */,
 				9D8783DE2140B6B9002226D0 /* Utils */,
 				9D8783DB2140B631002226D0 /* Controllers */,
+				9DFC0C922148736600E21E36 /* ViewModels */,
 				9D8783A82140AD07002226D0 /* MMLanScan */,
 				9D87837A2140AC29002226D0 /* AppDelegate.swift */,
 				9D8783812140AC29002226D0 /* Assets.xcassets */,
 				9D8783832140AC29002226D0 /* LaunchScreen.storyboard */,
 				9D8783862140AC29002226D0 /* Info.plist */,
-				9D8783E621416B1A002226D0 /* ApiRestPaths.json */,
 			);
 			path = MyControl;
 			sourceTree = "<group>";
@@ -235,7 +252,6 @@
 		9D8783A82140AD07002226D0 /* MMLanScan */ = {
 			isa = PBXGroup;
 			children = (
-				9D8783D82140B42E002226D0 /* MainPresenter.swift */,
 				9D8783D92140B42E002226D0 /* MMLANScan-Bridging-Header.h */,
 				9D8783B42140AE1C002226D0 /* Data */,
 				9D8783B32140AE0D002226D0 /* External Libs */,
@@ -331,7 +347,7 @@
 			children = (
 				9D8783DF2140B6C9002226D0 /* Extensions.swift */,
 				9D6F083F2142B8B40081DF7A /* AppColors.swift */,
-				9D6F08412142B9900081DF7A /* Settings.swift */,
+				9D95AB8E2149C81C00C42145 /* Alert.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -344,6 +360,24 @@
 				9D8783EA21417061002226D0 /* ApiPaths.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		9DFC0C922148736600E21E36 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9D8783D82140B42E002226D0 /* SearchViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9DFC0C952148891900E21E36 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D8783E621416B1A002226D0 /* ApiRestPaths-philips.json */,
+				9DFC0C9821488AF900E21E36 /* ApiRestPaths-samsung.json */,
+				9D27700E214ABE5B00E3F628 /* ApiRestPaths-lg.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A80A80CB6236C570FBF3239F /* Frameworks */ = {
@@ -467,9 +501,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D27700F214ABE5B00E3F628 /* ApiRestPaths-lg.json in Resources */,
+				9DFC0C9921488AF900E21E36 /* ApiRestPaths-samsung.json in Resources */,
 				9D8783B62140AE3E002226D0 /* data.plist in Resources */,
 				9D8783852140AC29002226D0 /* LaunchScreen.storyboard in Resources */,
-				9D8783E721416B1A002226D0 /* ApiRestPaths.json in Resources */,
+				9D8783E721416B1A002226D0 /* ApiRestPaths-philips.json in Resources */,
 				9D8783822140AC29002226D0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,11 +589,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D6F083E2142B24A0081DF7A /* NumberPadView.swift in Sources */,
+				9D95AB932149D5AD00C42145 /* DeviceTVCell.swift in Sources */,
 				9D8783BC2140AEAB002226D0 /* SimplePing.m in Sources */,
 				9D8783D02140AEE9002226D0 /* NetworkCalculator.m in Sources */,
 				9D8783EB21417061002226D0 /* ApiPaths.swift in Sources */,
 				9D8783DD2140B647002226D0 /* SearchViewController.swift in Sources */,
 				9D8783CD2140AEE9002226D0 /* MMLANScanner.m in Sources */,
+				9D95AB912149CC3400C42145 /* SmartTV.swift in Sources */,
+				9D95AB8F2149C81C00C42145 /* Alert.swift in Sources */,
 				9D8783E521416492002226D0 /* ApiResponses.swift in Sources */,
 				9D87837B2140AC29002226D0 /* AppDelegate.swift in Sources */,
 				9D8783BF2140AEC4002226D0 /* MacFinder.m in Sources */,
@@ -565,9 +604,10 @@
 				9D8783CF2140AEE9002226D0 /* MACOperation.m in Sources */,
 				9D8783E02140B6C9002226D0 /* Extensions.swift in Sources */,
 				9D8783D12140AEE9002226D0 /* LANProperties.m in Sources */,
+				9DFC0C94214874F800E21E36 /* Box.swift in Sources */,
 				9D6F08402142B8B40081DF7A /* AppColors.swift in Sources */,
 				9D6F083A21421EF30081DF7A /* ControlButton.swift in Sources */,
-				9D8783DA2140B42E002226D0 /* MainPresenter.swift in Sources */,
+				9D8783DA2140B42E002226D0 /* SearchViewModel.swift in Sources */,
 				9D8783CE2140AEE9002226D0 /* PingOperation.m in Sources */,
 				9D8783E321415EBB002226D0 /* ApiTV.swift in Sources */,
 				9D6F08422142B9900081DF7A /* Settings.swift in Sources */,

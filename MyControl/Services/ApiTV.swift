@@ -11,14 +11,18 @@ import SystemConfiguration
 
 extension ApiTV {
     
-    func toggleInputKey(buttonKey: ButtonKeyType!) {
-        let url = String(format:"%@%@", TV_SERVER_URL, ApiPaths.shared.inputKeyPath!)
-        let params: [String: Any] = ["key": ApiPaths.shared.inputKeyForButtonType(buttonKey)]
+    func sendInputKey(buttonKey: ButtonKeyType!) {
+        guard let serverUrl = TV_SERVER_URL else { print("Sem servidor")
+            return }
+        let url = String(format:"%@%@", serverUrl, paths.inputKeyPath!)
+        let params: [String: Any] = ["key": paths.inputKeyForButtonType(buttonKey)]
         fetchGenericData(url: url, method: .post, parameters: params) { (jsonResponse, error) in }
     }
     
     func tvSystemInfo(completion: @escaping(TVSystem?, String?) -> ()) {
-        let url = String(format:"%@%@", TV_SERVER_URL, ApiPaths.shared.systemPath!)
+        guard let serverUrl = TV_SERVER_URL else { print("Sem servidor")
+            return }
+        let url = String(format:"%@%@", serverUrl, paths.systemPath!)
         fetchGenericData(url: url, method: .get, parameters: nil) { (jsonResponse, error) in
             if (error != nil) {
                 completion(nil, error)
@@ -34,11 +38,18 @@ extension ApiTV {
 }
 
 class ApiTV {
-    private var TV_SERVER_URL: String!
-    private var TV_SERVER_PORT: Int! = ApiPaths.shared.port
+    fileprivate var TV_SERVER_URL: String!
+    fileprivate var TV_SERVER_PORT: Int!
+    fileprivate let paths: ApiPaths!
     
-    public static let shared: ApiTV = ApiTV()
-    private init() {}
+    private init(paths: ApiPaths) {
+        self.paths = paths
+        TV_SERVER_PORT = paths.port
+    }
+    
+    public static func factory(brand: TVBrand!) -> ApiTV! {
+        return ApiTV(paths: ApiPaths.factory(brand))
+    }
     
     var isFound: Bool! {
         get {
@@ -46,21 +57,29 @@ class ApiTV {
         }
     }
     
-    func tryFetchServerForAddress(address: String!) {
+    func setServerAddress(address: String!) {
+        self.TV_SERVER_URL = String(format:"http://%@:%i%@", address, self.paths.port, self.paths.server)
+    }
+    
+    func tryFetchServerForAddress(address: String!, completion: @escaping((Bool) -> ())) {
         if (!isFound) {
-            let url = String(format:"http://%@:%i%@%@", address, ApiPaths.shared.port, ApiPaths.shared.server, ApiPaths.shared.systemPath!)
-            fetchGenericData(url: url, method: .get,parameters: nil) { (jsonResponse, error) in
-                if (error != nil) {
-                    print("Address: \(address!) is not a service for url \(url)")
+            let url = String(format:"http://%@:%i%@%@", address, paths.port, paths.server, paths.systemPath!)
+            let nsurl: URL! = URL(string: url)!
+            var request : URLRequest! = URLRequest(url: nsurl as URL)
+            request.httpMethod = "GET"
+            request.timeoutInterval = 1.0
+            
+            let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
+            var dataTask: URLSessionDataTask?
+            dataTask = defaultSession.dataTask(with: request! as URLRequest) { (_, response, error) -> Void in
+                if let urlResponse = response as? HTTPURLResponse {
+                    completion((urlResponse.statusCode != 404))
                 } else {
-                    if let dic = jsonResponse as? [String: Any] {
-                        self.decodeDictionary(dictionary: dic, completion: { (system: TVSystem?) in
-                            print("TV Encontrada")
-                            self.TV_SERVER_URL = String(format:"http://%@:%i%@", address, ApiPaths.shared.port, ApiPaths.shared.server)
-                        })
-                    }
+                    completion(false)
                 }
             }
+            
+            dataTask?.resume()
         }
     }
     

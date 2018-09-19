@@ -10,23 +10,27 @@ import Foundation
 
 struct ApiPaths: Decodable {
     
-    static let shared = ApiPaths()
+    var brand: String!
     var port: Int!
     var server: String!
     var methods: [Method]?
     var inputKeys: [InputKey]?
     
-    private init() {
-        if let path = Bundle.main.path(forResource: "ApiRestPaths", ofType: "json") {
+    private init() { }
+    
+    static func factory(_ brand: TVBrand!) -> ApiPaths! {
+        if let path = Bundle.main.path(forResource: String(format: "ApiRestPaths-%@", brand.stringValue), ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 let jsonPrinted = try? JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
-                self = try JSONDecoder().decode(ApiPaths.self, from: jsonPrinted!)
+                return try JSONDecoder().decode(ApiPaths.self, from: jsonPrinted!)
             } catch {
-                print("Error on decode JSON: \(error)")
+                print("Error on decode ApiRestPaths JSON: \(error)")
+                return nil
             }
         }
+        return nil
     }
     
     var systemPath: String? {
@@ -53,7 +57,7 @@ struct ApiPaths: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case inputKeys = "input_keys"
-        case port, server, methods
+        case brand, port, server, methods
     }
 }
 

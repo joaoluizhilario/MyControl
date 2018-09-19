@@ -10,27 +10,33 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    private var myContext = 0
-    var presenter: MainPresenter!
+    var viewModel: SearchViewModel!
     
-    let centerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Carregando..."
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.semibold)
-        label.textColor = .darkGray
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let refresh: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.backgroundColor = .clear
+        refresh.tintColor = .lightGray
+        refresh.attributedTitle = NSAttributedString(string: "Deslize para atualizar")
+        return refresh
     }()
     
-    let indicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
-        indicator.hidesWhenStopped = true
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.color = .black
-        indicator.startAnimating()
-        return indicator
+    lazy var collectionView: UICollectionView! = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = .clear
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.isUserInteractionEnabled = true
+        collection.isMultipleTouchEnabled = true
+        collection.delegate = self
+        collection.dataSource = self
+        collection.register(DeviceTVCell.self, forCellWithReuseIdentifier: String(describing: DeviceTVCell.self))
+        collection.contentInset = UIEdgeInsetsMake(8, 8, 8, 8)
+        collection.alwaysBounceVertical = true
+        refresh.addTarget(self, action: #selector(handleSearch), for: .valueChanged)
+        collection.addSubview(refresh)
+        return collection
     }()
     
     let progressView: UIProgressView = {
@@ -40,135 +46,97 @@ class SearchViewController: UIViewController {
         return view
     }()
     
-    lazy var completeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Tentar novamente", for: .normal)
-        button.setTitleColor(view.tintColor, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
-        button.isHidden = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleComplete), for: .touchUpInside)
-        return button
-    }()
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     override func viewDidLoad() {
-        
+        self.viewModel = SearchViewModel(delegate:self)
         super.viewDidLoad()
         setupViews()
-        self.presenter = MainPresenter(delegate:self)
-        
-        self.addObserversForKVO()
-        handleComplete()
+        setupEvents()
     }
     
     func setupViews() {
-        view.backgroundColor = .white
-        view.addSubview(centerLabel)
-        view.addSubview(indicator)
+        view.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        view.addSubview(collectionView)
         view.addSubview(progressView)
-        view.addSubview(completeButton)
         
-        view.addConstraintsWithFormat(format: "H:|-8-[v0]-8-|", views: centerLabel)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: progressView)
-        view.addConstraintsWithFormat(format: "V:|[v0(2)]", views: progressView)
-        
-        view.addConstraintsWithFormat(format: "V:[v0]-30-|", views: completeButton)
-        completeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        centerLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        centerLabel.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.75).isActive = true
-        
-        indicator.topAnchor.constraint(equalTo: centerLabel.bottomAnchor, constant: 10).isActive = true
-        indicator.centerXAnchor.constraint(equalTo: centerLabel.centerXAnchor).isActive = true
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
+        view.addConstraintsWithFormat(format: "V:|[v0(2)][v1]-8-|", views: progressView, collectionView)
     }
     
-    //MARK: - KVO Observers
-    func addObserversForKVO ()->Void {
-        self.presenter.addObserver(self, forKeyPath: "connectedDevices", options: .new, context:&myContext)
-        self.presenter.addObserver(self, forKeyPath: "progressValue", options: .new, context:&myContext)
-        self.presenter.addObserver(self, forKeyPath: "isScanRunning", options: .new, context:&myContext)
-    }
-    
-    func removeObserversForKVO() -> Void {
-        self.presenter.removeObserver(self, forKeyPath: "connectedDevices")
-        self.presenter.removeObserver(self, forKeyPath: "progressValue")
-        self.presenter.removeObserver(self, forKeyPath: "isScanRunning")
-    }
-    
-    @objc func handleComplete() {
-        if (ApiTV.shared.isFound) {
-            navigationController?.pushViewController(RemoteControlViewController(), animated: true)
-        } else {
-            completeButton.isHidden = true
-            progressView.isHidden = false
-            indicator.startAnimating()
-            self.presenter.scanButtonClicked()
-        }
-    }
-    
-    //MARK: - Alert Controller
-    func showAlert(title:String, message: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in}
-        
-        alertController.addAction(okAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    //MARK: - KVO
-    //This is the KVO function that handles changes on MainPresenter
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if (context == &myContext) {
-            switch keyPath! {
-            case "connectedDevices":
-                self.centerLabel.text = "Dispositivos encontrados na rede: \(self.presenter.connectedDevices.count)"
-                if (!ApiTV.shared.isFound) {
-                    if (self.presenter.connectedDevices.count > 0) {
-                        let device: MMDevice = self.presenter.connectedDevices[self.presenter.connectedDevices.count-1]
-                        ApiTV.shared.tryFetchServerForAddress(address: device.ipAddress)
-                    }
-                }
-            case "progressValue":
-                self.progressView.progress = self.presenter.progressValue
-            default:
-                print("Not valid key for observing")
+    func setupEvents() {
+        viewModel.reacheableTVs.bind { (devices) in
+            DispatchQueue.main.async {
+                self.refresh.removeTarget(self, action: #selector(self.handleSearch), for: .valueChanged)
+                self.collectionView.reloadData()
             }
         }
+        
+        viewModel.progressValue.bind { (progressValue) in
+            DispatchQueue.main.async {
+                self.progressView.progress = progressValue
+                if (self.viewModel.isScanRunning) {
+                    let progress: Int = Int(progressValue * 100)
+                    self.refresh.attributedTitle = NSAttributedString(string: "\(progress)%")
+                }
+            }
+        }
+        
+        handleSearch()
     }
     
-    //MARK: - Deinit
-    deinit {
-        self.removeObserversForKVO()
+    @objc func handleSearch() {
+        progressView.isHidden = false
+        self.viewModel.startScanning()
     }
 }
 
-extension SearchViewController: MainPresenterDelegate {
-    //MARK: - Presenter Delegates
-    //The delegates methods from Presenters.These methods help the MainPresenter to notify the MainVC for any kind of changes
-    func mainPresenterIPSearchFinished() {
-        indicator.stopAnimating()
+extension SearchViewController: SearchViewModelDelegate {
+    
+    func searchFinished() {
         progressView.isHidden = true
-        completeButton.isHidden = false
-        if (ApiTV.shared.isFound) {
-            completeButton.setTitle("Continuar", for: .normal)
-            ApiTV.shared.tvSystemInfo { (system: TVSystem?, error: String?) in
-                DispatchQueue.main.async {
-                    self.centerLabel.text = "\(system!.name!) foi encontrada \u{1F60E}"
-                }
-            }
-        } else {
-            completeButton.setTitle("Tentar novamente", for: .normal)
-            centerLabel.text = "Sua TV não foi encontrada \u{1F615}"
+        
+        self.refresh.endRefreshing()
+        self.refresh.addTarget(self, action: #selector(self.handleSearch), for: .valueChanged)
+        self.refresh.attributedTitle = NSAttributedString(string: "Deslize para atualizar")
+        
+        if (viewModel.reacheableTVs.value.count == 0) {
+            Alert.showNoOneTVFound(on: self)
         }
     }
-    func mainPresenterIPSearchFailed() {}
-    func mainPresenterIPSearchCancelled() {}
+    
+    func searchFailed() {}
+}
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.reacheableTVs.value.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: DeviceTVCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: DeviceTVCell.self), for: indexPath) as! DeviceTVCell
+        let tv = viewModel.reacheableTVs.value[indexPath.item]
+        cell.deviceInfo.text = tv.ipAddress
+        cell.imageView.image = UIImage(named: String(format: "logo_%@", tv.brand.stringValue))
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tv = viewModel.reacheableTVs.value[indexPath.item]
+        Settings.shared.tv = tv
+        navigationController?.pushViewController(RemoteControlViewController(tv), animated: true)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size: CGFloat = (UIScreen.main.bounds.width / 2) - (13)
+        return CGSize(width: size, height: size)
+    }
 }
